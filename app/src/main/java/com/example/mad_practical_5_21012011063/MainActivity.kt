@@ -4,7 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.AlarmClock
+import android.provider.CallLog
 import android.provider.ContactsContract
+import android.provider.MediaStore
 import android.widget.Button
 import android.widget.EditText
 
@@ -34,6 +37,15 @@ class MainActivity : AppCompatActivity() {
         glr.setOnClickListener {
             gallery()
         }
+
+        val cam:Button = findViewById(R.id.camera)
+        cam.setOnClickListener { camera()
+        }
+
+        val alar:Button=findViewById(R.id.alarm)
+        alar.setOnClickListener { alarm()
+        }
+
     }
 
     fun browser(url: String) {
@@ -45,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun callLog() {
-        Intent(Intent.ACTION_VIEW).setType(ContactsContract.Contacts.CONTENT_TYPE).also { startActivity(it) }
+        Intent(Intent.ACTION_VIEW).setType(CallLog.Calls.CONTENT_TYPE).also { startActivity(it) }
     }
 
     fun gallery() {
@@ -54,9 +66,13 @@ class MainActivity : AppCompatActivity() {
 
     fun camera() {
 
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { startActivity(it) }
+
     }
 
     fun alarm() {
+
+        Intent(AlarmClock.ACTION_SHOW_ALARMS).also { startActivity(it) }
 
     }
 }
